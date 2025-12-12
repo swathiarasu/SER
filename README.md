@@ -22,6 +22,8 @@ This project has two primary goals:
 
 ## Repository Structure
 
+
+```text
 SER/
 ├── wav2vec2.py                # Wav2Vec2 training, evaluation, and inference
 ├── crema_cnn_baseline.ipynb   # CNN baseline using mel-spectrograms
@@ -29,9 +31,7 @@ SER/
 ├── make_report_figures.py     # Generates confusion matrices and plots
 ├── output/                    # Saved predictions, reports, and figures
 └── README.md                  # Project documentation
-
-yaml
-Copy code
+```
 
 ---
 
@@ -69,7 +69,7 @@ Copy code
 
 ---
 
-## 🔍 Supplementary Study: Rudeness Detection
+## Supplementary Study: Rudeness Detection
 
 Beyond categorical emotions, we explore **rudeness** as a nuanced social tone trait:
 
@@ -77,11 +77,11 @@ Beyond categorical emotions, we explore **rudeness** as a nuanced social tone tr
 - PCA and UMAP analysis of Wav2Vec2 embeddings
 - Prosodic analysis (spectral centroid, RMS energy)
 - Construction of a **rudeness trait vector**:
-  
-v_rude = mean(E_rude) − mean(E_not_rude)
 
-yaml
-Copy code
+```
+v_rude = mean(E_rude) − mean(E_not_rude)
+```
+
 
 **Finding:**  
 Rudeness does not form a discrete class but occupies a consistent region in embedding space, supporting a **continuous trait-based modeling approach**.
@@ -93,21 +93,17 @@ Rudeness does not form a discrete class but occupies a consistent region in embe
 ### Inspect dataset
 ```bash
 python3 wav2vec2.py inspect --source_dir <AUDIO_DIR>
+
 Create train/val/test split
-bash
-Copy code
 python3 wav2vec2.py split --source_dir <AUDIO_DIR> --target_dir ./dataset_split
+
 Train Wav2Vec2
-bash
-Copy code
 python3 wav2vec2.py train --data_root ./dataset_split --out_dir ./ser_wav2vec2_ckpt
+
 Evaluate model
-bash
-Copy code
 python3 wav2vec2.py test --data_root ./dataset_split --ckpt_dir ./ser_wav2vec2_ckpt
+
 Predict emotion for a single audio file
-bash
-Copy code
 python3 wav2vec2.py predict_wav \
   --wav_path <PATH_TO_WAV> \
   --ckpt_dir ./ser_wav2vec2_ckpt
@@ -122,12 +118,12 @@ Rudeness annotations are limited in size and culturally subjective.
 Fear and sadness remain challenging due to overlapping acoustic cues.
 
 ## Future Work
-Multitask learning for emotion + social tone traits
+- Multitask learning for emotion + social tone traits
 
-Larger-scale rudeness annotation
+- Larger-scale rudeness annotation
 
-Multimodal fusion (text, facial expressions)
+- Multimodal fusion (text, facial expressions)
 
-Prosody-aware or attention-based pooling strategies
+- Prosody-aware or attention-based pooling strategies
 
      
